@@ -5,6 +5,6 @@ namespace CreditsafeCountryApi.Coordinators
 {
     public interface ISearchCoordinator
     {
-        Task<IEnumerable<City>> SearchCities(string name);
+        Task<IEnumerable<CityResult>> SearchCities(string name);
     }
 }

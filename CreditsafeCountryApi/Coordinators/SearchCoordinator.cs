@@ -27,18 +27,28 @@ namespace CreditsafeCountryApi.Coordinators
             List<CityResult> searchResults = new List<CityResult>();
 
             //filter results that are in both local cities and countries list
-            var result = localCities.Where(a => countries.Any(b => b.Name.Contains(a.Name)));
+            var result = localCities.Where(a => countries.Any(b => b.Name.ToLower().Contains(a.Name.ToLower())));
 
-            if (result.Count() != 0)
+            if (result.Any())
             {
-                foreach (var item in countries)
-                {
-                    searchResults.Add(new CityResult()
+                foreach (var item in result)
+                { 
+                    foreach(var country in countries)
                     {
-                        Name = item.Name,
-                       // State = 
-                        Weather = await _weatherService.GetWeather(name, item.Alpha2Code.ToString())
-                    });;
+                        searchResults.Add(new CityResult()
+                        {
+                            Name = item.Name,
+                            State = item.State,
+                            Country = item.Country,
+                            TouristRating = item.TouristRating,
+                            DateEstablished = item.DateEstablished,
+                            EstimatedPopulation = item.EstimatedPopulation,
+                            TwoDigitCode = country.Alpha2Code,
+                            ThreeDigitCode = country.Alpha3Code,
+                            CurrencyCode = country.Currencies.FirstOrDefault().Name,
+                            Weather = await _weatherService.GetWeather(name)
+                        }); 
+                    }
                 }
             }
             return searchResults;

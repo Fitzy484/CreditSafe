@@ -3,7 +3,7 @@ namespace CreditsafeCountryApi.Services
 {
     public class WeatherService : IWeatherService
     {
-        public async Task<WeatherData> GetWeather(string name, string countryCode)
+        public async Task<WeatherData> GetWeather(string name)
         {
 
             try
