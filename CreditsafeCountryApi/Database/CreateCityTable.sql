@@ -1,6 +1,6 @@
 Use [db.Cities]
 Go
-Create table [dbo.Cities](
+Create table [Cities](
 [CityId] [int] IDENTITY (1,1) NOT NULL,
 [Name] [nvarchar](50) NOT NULL,
 [State] [nvarchar](50) NOT NULL,
